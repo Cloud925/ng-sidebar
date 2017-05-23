@@ -1,3 +1,5 @@
+import { isPlatformBrowser } from '@angular/common';
+import { Inject, PLATFORM_ID } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -135,8 +137,8 @@ export class Sidebar implements OnInit, OnChanges, OnDestroy {
   private _onResizeAttached: boolean = false;
 
   constructor(
-    private _sidebarService: SidebarService) {
-    if (isIOS() && 'ontouchstart' in window) {
+    private _sidebarService: SidebarService, @Inject(PLATFORM_ID) private platformId: Object) {
+    if (isPlatformBrowser(this.platformId) && (isIOS() && 'ontouchstart' in window)) {
       this._clickEvent = 'touchstart';
     }
 
