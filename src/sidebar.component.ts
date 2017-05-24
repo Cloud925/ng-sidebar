@@ -1,3 +1,4 @@
+import { isPlatformServer } from '@angular/common/common';
 import { isPlatformBrowser } from '@angular/common';
 import { Inject, PLATFORM_ID } from '@angular/core';
 import {
@@ -142,7 +143,7 @@ export class Sidebar implements OnInit, OnChanges, OnDestroy {
       this._clickEvent = 'touchstart';
     }
 
-    this._normalizePosition();
+    this._normalizePosition(this.platformId);
 
     this.open = this.open.bind(this);
     this.close = this.close.bind(this);
@@ -621,8 +622,8 @@ export class Sidebar implements OnInit, OnChanges, OnDestroy {
    *
    * "Normalizes" position. For example, "start" would be "left" if the page is LTR.
    */
-  private _normalizePosition(): void {
-    const ltr: boolean = isLTR();
+  private _normalizePosition(platformId: Object): void {
+    const ltr: boolean = isPlatformBrowser ? isLTR() : true;
 
     if (this.position === 'start') {
       this.position = ltr ? 'left' : 'right';
