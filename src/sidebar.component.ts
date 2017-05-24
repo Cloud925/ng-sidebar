@@ -1,4 +1,3 @@
-import { isPlatformServer } from '@angular/common/common';
 import { isPlatformBrowser } from '@angular/common';
 import { Inject, PLATFORM_ID } from '@angular/core';
 import {
@@ -190,7 +189,7 @@ export class Sidebar implements OnInit, OnChanges, OnDestroy {
 
     if (changes['position']) {
       // Handle "start" and "end" aliases
-      this._normalizePosition();
+      this._normalizePosition(this.platformId);
 
       // Emit change in timeout to allow for position change to be rendered first
       setTimeout(() => {
