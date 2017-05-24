@@ -622,7 +622,7 @@ export class Sidebar implements OnInit, OnChanges, OnDestroy {
    * "Normalizes" position. For example, "start" would be "left" if the page is LTR.
    */
   private _normalizePosition(platformId: Object): void {
-    const ltr: boolean = isPlatformBrowser ? isLTR() : true;
+    const ltr: boolean = isPlatformBrowser(platformId) ? isLTR() : true;
 
     if (this.position === 'start') {
       this.position = ltr ? 'left' : 'right';
